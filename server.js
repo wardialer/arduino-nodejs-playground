@@ -16,6 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/test', routes.test);
 
+app.get('*', function(req, res) {
+    res.sendfile('public/index.html');
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
