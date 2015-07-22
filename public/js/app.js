@@ -1,4 +1,5 @@
 angular.module('arduinoApp', [
     'ui.router',
-    'appRoutes'
+    'appRoutes',
+    'TestCtrl'
 ]);
