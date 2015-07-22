@@ -6,6 +6,7 @@ angular.module('appRoutes', [])
     $stateProvider
         .state('home', {
             url: '/',
+            templateUrl: 'home.html',
             controller: 'TestController'
         })
 }]);
