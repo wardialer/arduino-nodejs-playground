@@ -11,8 +11,9 @@ board.on("ready", function() {
         pin: "A1",
         freq: 250
     });
-    humidity = new five.Pin({
-        pin: "A2"
+    humidity = new five.Sensor({
+        pin: "A2",
+        freq: 250
     });
 
 });
