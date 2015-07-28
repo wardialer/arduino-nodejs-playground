@@ -3,6 +3,8 @@ var routes = require('./routes/routes');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
+var Reading = require('../models/reading');
+var repeat = require('repeat');
 
 var app = express();
 
@@ -23,3 +25,12 @@ app.get('*', function(req, res) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var readSensors = function(){
+    var reading = new Reading(routes.makeReading());
+    reading.save(function(err, reading){
+        console.log('saved '+JSON.stringify(reading));
+    })
+}
+
+repeat(readSensors).every(1,'m').start.now();

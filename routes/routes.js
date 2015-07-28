@@ -21,10 +21,9 @@ board.on("ready", function() {
 
 });
 
-// <3
-exports.test = function(req, res, next){
+var makeReading = exports.makeReading = function() {
+    var reading = {};
     
-    var reading = new Reading();
     reading.temp = temp.celsius;
     reading.light = {
         scaled: light.value, 
@@ -35,8 +34,14 @@ exports.test = function(req, res, next){
         raw: humidity.raw
     };
 
-    reading.save(function(err, result){
-        res.json(result);
-    });
+    return reading;
+}
+
+// <3
+exports.test = function(req, res, next){
+    var reading = new Reading(makeReading());
     
+    reading.save(function(err, reading) {
+        res.json(reading);
+    });
 };

@@ -5,6 +5,7 @@
     "dependencies": {
         "express" : "3.4.0",
         "mongoose" : "4.0.1",
-        "johnny-five" : "0.8.85"
+        "johnny-five" : "0.8.85",
+        "repeat" : "0.0.6"
     }
 }
