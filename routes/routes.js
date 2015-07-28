@@ -24,18 +24,17 @@ board.on("ready", function() {
 // <3
 exports.test = function(req, res, next){
     
-    var obj = {
-        temp: temp.celsius, 
-        light: {
-            scaled: light.value, 
-            raw: light.raw
-        },
-        humidity: {
-            scaled: humidity.value, 
-            raw: humidity.raw
-        }
-   };
-    var reading = new Reading(obj);
+    var reading = new Reading();
+    reading.temp = temp.celsius;
+    reading.light = {
+        scaled: light.value, 
+        raw: light.raw
+    };
+    reading.humidity = {
+        scaled: humidity.value, 
+        raw: humidity.raw
+    };
+
     reading.save(function(err, result){
         res.json(result);
     });

@@ -12,4 +12,4 @@ var readingSchema = mongoose.Schema({
     }
 });
 
-exports.reading = mongoose.model('Reading', readingSchema);
+module.exports = mongoose.model('Reading', readingSchema);
