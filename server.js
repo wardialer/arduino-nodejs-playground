@@ -3,7 +3,7 @@ var routes = require('./routes/routes');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
-var Reading = require('models/reading');
+var Reading = require('./models/reading');
 var repeat = require('repeat');
 
 var app = express();
@@ -33,5 +33,5 @@ var readSensors = function(){
     })
 }
 
-repeat(readSensors).every(1,'m').start.now();
+repeat(readSensors).every(1,'m').start.in(30, 's');
 
