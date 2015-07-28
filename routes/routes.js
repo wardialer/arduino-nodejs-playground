@@ -1,5 +1,6 @@
 var five = require("johnny-five");
 var board = new five.Board();
+var Reading = require('../models/reading');
 
 var temp, light, humidity;
 board.on("ready", function() {
@@ -22,6 +23,7 @@ board.on("ready", function() {
 
 // <3
 exports.test = function(req, res, next){
+    
     var obj = {
         temp: temp.celsius, 
         light: {
@@ -33,6 +35,9 @@ exports.test = function(req, res, next){
             raw: humidity.raw
         }
    };
-   
-    res.json(obj);
+    var reading = new Reading(obj);
+    reading.save(function(err, result){
+        res.json(result);
+    });
+    
 };
