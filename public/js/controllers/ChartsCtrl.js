@@ -33,7 +33,7 @@ angular.module('ChartsCtrl', [])
                     vAxis: {
                         gridlines: {color: 'none'},
                         minValue: 0
-                    }
+                    },
                     legend: {
                         position: 'top', 
                         maxLines: 3
