@@ -27,6 +27,7 @@ angular.module('ChartsCtrl', [])
                     title: 'Sensors',
                     height: 500, 
                     hAxis: {
+                        title: 'Date',
                         format: 'dd/MMM/yyyy HH:mm'
                     },
                     legend: {
