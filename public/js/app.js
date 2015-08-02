@@ -1,5 +1,7 @@
 angular.module('arduinoApp', [
     'ui.router',
+    'googlechart',
     'appRoutes',
-    'TestCtrl'
+    'ChartsCtrl',
+    'TestCtrl',
 ]);

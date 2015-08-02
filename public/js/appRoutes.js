@@ -9,4 +9,9 @@ angular.module('appRoutes', [])
             templateUrl: 'home.html',
             controller: 'TestController'
         })
+        .state('charts', {
+            url: '/charts',
+            templateUrl: 'charts.html',
+            controller: 'ChartsController'
+        })
 }]);
