@@ -1,119 +1,24 @@
 angular.module('ChartsCtrl', [])
-.controller('ChartsController', ['$scope', '$http', function($scope, $http) {
-    $scope.chartObject = {
-      "type": "LineChart",
-      "displayed": true,
-      "data": {
-        "cols": [
-          {
-            "id": "month",
-            "label": "Month",
-            "type": "string",
-            "p": {}
-          },
-          {
-            "id": "laptop-id",
-            "label": "Laptop",
-            "type": "number",
-            "p": {}
-          },
-          {
-            "id": "desktop-id",
-            "label": "Desktop",
-            "type": "number",
-            "p": {}
-          },
-          {
-            "id": "server-id",
-            "label": "Server",
-            "type": "number",
-            "p": {}
-          },
-          {
-            "id": "cost-id",
-            "label": "Shipping",
-            "type": "number"
-          }
-        ],
-        "rows": [
-          {
-            "c": [
-              {
-                "v": "January"
-              },
-              {
-                "v": 19,
-                "f": "42 items"
-              },
-              {
-                "v": 12,
-                "f": "Ony 12 items"
-              },
-              {
-                "v": 7,
-                "f": "7 servers"
-              },
-              {
-                "v": 4
-              }
-            ]
-          },
-          {
-            "c": [
-              {
-                "v": "February"
-              },
-              {
-                "v": 13
-              },
-              {
-                "v": 1,
-                "f": "1 unit (Out of stock this month)"
-              },
-              {
-                "v": 12
-              },
-              {
-                "v": 2
-              }
-            ]
-          },
-          {
-            "c": [
-              {
-                "v": "March"
-              },
-              {
-                "v": 24
-              },
-              {
-                "v": 5
-              },
-              {
-                "v": 11
-              },
-              {
-                "v": 6
-              }
-            ]
-          }
-        ]
-      },
-      "options": {
-        "title": "Sales per month",
-        "isStacked": "true",
-        "fill": 20,
-        "displayExactValues": true,
-        "vAxis": {
-          "title": "Sales unit",
-          "gridlines": {
-            "count": 10
-          }
-        },
-        "hAxis": {
-          "title": "Date"
-        }
-      },
-      "formatters": {}
-    }
+.controller('ChartsController', ['$scope', '$http', 'googleChartApiPromise' function($scope, $http, googleChartApiPromise) {
+
+    googleChartApiPromise.then(function() {
+        var countersChart = new google.visualization.DataTable();
+        countersChart.addColumn("string", "label");
+        countersChart.addColumn("number", "elementi totali");
+        countersChart.addColumn("number", "geolocalizzati");
+        countersChart.addColumn("number", "multimediali");
+
+        countersChart.addRows(1);
+        countersChart.setCell(0, 1, 150);
+        countersChart.setCell(0, 2, 180);
+        countersChart.setCell(0, 3, 30);
+
+        $scope.countersChart = {
+            type: 'BarChart',
+            data: countersChart,
+            options: {backgroundColor: '#FAFAFA', height: 500, legend: {position: 'top', maxLines: 3}, chartArea: {left: 0, width: '100%', height: '70%'}}
+        };
+
+    });
+
 }]);
