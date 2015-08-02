@@ -5,7 +5,7 @@ angular.module('ChartsCtrl', [])
 
         googleChartApiPromise.then(function() {
             var countersChart = new google.visualization.DataTable();
-            countersChart.addColumn("date", "Date");
+            countersChart.addColumn("string", "Date");
             countersChart.addColumn("number", "Temperature (°C)");
             countersChart.addColumn("number", "Humidity (scaled)");
             countersChart.addColumn("number", "Light (scaled)");
@@ -13,9 +13,8 @@ angular.module('ChartsCtrl', [])
             countersChart.addRows(readings.length);
             for (var i=0; i<readings.length; i++) {
                 var reading = readings[i];
-                var date = new Date(reading.date);
 
-                countersChart.setCell(i, 0, new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()));
+                countersChart.setCell(i, 0, reading.date);
                 countersChart.setCell(i, 1, reading.temp);
                 countersChart.setCell(i, 2, reading.humidity.scaled);
                 countersChart.setCell(i, 3, reading.light.scaled);
@@ -27,9 +26,9 @@ angular.module('ChartsCtrl', [])
                 options: {
                     title: 'Sensors',
                     height: 500, 
-                    hAxis: {
-                        title: 'Date',
-                        format: 'dd/MMM/yyyy HH:mm'
+                    vAxis: {
+                        minValue: 0,
+                        gridlines: {count: 5}
                     },
                     legend: {
                         position: 'top', 
