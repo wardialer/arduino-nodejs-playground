@@ -9,7 +9,8 @@ var readingSchema = mongoose.Schema({
     humidity: {
         raw: String,
         scaled: String
-    }
+    },
+    date: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Reading', readingSchema);
