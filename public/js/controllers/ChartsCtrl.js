@@ -27,12 +27,7 @@ angular.module('ChartsCtrl', [])
                     title: 'Sensors',
                     height: 500, 
                     hAxis: {
-                        format: 'd/M/yy',
-                        gridlines: {count: 15}
-                    },
-                    vAxis: {
-                        gridlines: {color: 'none'},
-                        minValue: 0
+                        format: 'dd/MMM/yyyy HH:mm'
                     },
                     legend: {
                         position: 'top', 
