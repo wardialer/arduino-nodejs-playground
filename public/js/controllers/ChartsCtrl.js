@@ -23,7 +23,13 @@ angular.module('ChartsCtrl', [])
             $scope.countersChart = {
                 type: 'LineChart',
                 data: countersChart,
-                options: {backgroundColor: '#FAFAFA', height: 500, legend: {position: 'top', maxLines: 3}, chartArea: {left: 0, width: '100%', height: '70%'}}
+                options: {
+                    height: 500, 
+                    legend: {
+                        position: 'top', 
+                        maxLines: 3
+                    } 
+                }
             };
 
         });
