@@ -24,7 +24,7 @@ angular.module('ChartsCtrl', [])
                 type: 'LineChart',
                 data: countersChart,
                 options: {
-                    title: 'Sensors'
+                    title: 'Sensors',
                     height: 500, 
                     hAxis: {
                         format: 'd/M/yy',
