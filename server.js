@@ -17,6 +17,8 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 
+app.get('/get', routes.get);
+
 app.get('*', function(req, res) {
     res.sendfile('public/index.html');
 });
