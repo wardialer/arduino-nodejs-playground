@@ -63,5 +63,5 @@ var readSensors = function(){
     })
 }
 
-repeat(readSensors).every(1,'m').start.in(30, 's');
+repeat(readSensors).every(1,'h').start.in(30, 's');
 
