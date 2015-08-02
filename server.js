@@ -1,15 +1,16 @@
 var express = require('express');
-var routes = require('./routes/routes');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
-var Reading = require('./models/reading');
 var repeat = require('repeat');
+var config = require('./conf/config');
+var routes = require('./routes/routes');
+var Reading = require('./models/reading');
 
 var app = express();
 
 // all environments
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds063892.mongolab.com:63892/friendly-killer-robot");
+mongoose.connect("mongodb://"+config.username+":"+config.password+"@ds063892.mongolab.com:63892/friendly-killer-robot");
 app.set('port', process.env.PORT || 3000);
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -33,5 +34,5 @@ var readSensors = function(){
     })
 }
 
-repeat(readSensors).every(1,'m').start.in(30, 's');
+repeat(readSensors).every(1,'h').start.in(30, 's');
 
