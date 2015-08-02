@@ -3,9 +3,9 @@ var http = require('http');
 var mongoose = require('mongoose');
 var repeat = require('repeat');
 var five = require("johnny-five");
-var config = require('./conf/config');
-var routes = require('./routes/routes');
-var Reading = require('./models/reading');
+var config = require(__dirname +'/conf/config');
+var routes = require(__dirname +'/routes/routes');
+var Reading = require(__dirname +'/models/reading');
 
 var app = express();
 
