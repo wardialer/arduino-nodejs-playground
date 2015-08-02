@@ -1,5 +1,5 @@
 angular.module('ChartsCtrl', [])
-.controller('ChartsController', ['$scope', '$http', 'googleChartApiPromise' function($scope, $http, googleChartApiPromise) {
+.controller('ChartsController', ['$scope', '$http', 'googleChartApiPromise', function($scope, $http, googleChartApiPromise) {
 
     googleChartApiPromise.then(function() {
         var countersChart = new google.visualization.DataTable();
