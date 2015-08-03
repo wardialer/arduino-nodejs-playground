@@ -36,12 +36,12 @@ board.on("ready", function() {
     });
 
     light = new five.Sensor({
-        pin: "A1",
+        pin: "A2",
         freq: 250
     }).scale(0, 100);
 
     humidity = new five.Sensor({
-        pin: "A2",
+        pin: "A4",
         freq: 250
     }).scale(0, 100);
 
