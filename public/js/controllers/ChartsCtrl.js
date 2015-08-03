@@ -30,6 +30,9 @@ angular.module('ChartsCtrl', [])
                         minValue: 0,
                         gridlines: {count: 5}
                     },
+                    hAxis: {
+                        showTextEvery: Math.floor(readings.length/5)
+                    },
                     legend: {
                         position: 'top', 
                         maxLines: 3
