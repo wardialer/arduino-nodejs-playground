@@ -13,8 +13,10 @@ angular.module('ChartsCtrl', [])
             countersChart.addRows(readings.length);
             for (var i=0; i<readings.length; i++) {
                 var reading = readings[i];
+                var readingDate = new Date(reading.date);
+                var chartDate = new Date(readingDate.getFullYear(), readingDate.getMonth(), _date.getDate(), _date.getHours(), _date.getMinutes());
 
-                countersChart.setCell(i, 0, reading.date);
+                countersChart.setCell(i, 0, chartDate);
                 countersChart.setCell(i, 1, reading.temp);
                 countersChart.setCell(i, 2, reading.humidity.scaled);
                 countersChart.setCell(i, 3, reading.light.scaled);
@@ -25,6 +27,7 @@ angular.module('ChartsCtrl', [])
                 data: countersChart,
                 options: {
                     title: 'Sensors',
+                    height: 500,
                     vAxes: {
                         0: {
                             title: 'Temp (Celsius)',
