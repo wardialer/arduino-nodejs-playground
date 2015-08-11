@@ -13,8 +13,10 @@ angular.module('ChartsCtrl', [])
             countersChart.addRows(readings.length);
             for (var i=0; i<readings.length; i++) {
                 var reading = readings[i];
+                var date = new Date(reading.date);
+                var dateString = date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes();
 
-                countersChart.setCell(i, 0, new Date(reading.date).toLocaleDateString());
+                countersChart.setCell(i, 0, dateString);
                 countersChart.setCell(i, 1, reading.temp);
                 countersChart.setCell(i, 2, reading.humidity.scaled);
                 countersChart.setCell(i, 3, reading.light.scaled);
