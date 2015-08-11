@@ -5,7 +5,7 @@ angular.module('ChartsCtrl', [])
 
         googleChartApiPromise.then(function() {
             var countersChart = new google.visualization.DataTable();
-            countersChart.addColumn("string", "Date");
+            countersChart.addColumn("date", "Date");
             countersChart.addColumn("number", "Temperature (°C)");
             countersChart.addColumn("number", "Humidity (scaled)");
             countersChart.addColumn("number", "Light (scaled)");
