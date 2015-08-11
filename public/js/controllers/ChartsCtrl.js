@@ -14,7 +14,7 @@ angular.module('ChartsCtrl', [])
             for (var i=0; i<readings.length; i++) {
                 var reading = readings[i];
                 var readingDate = new Date(reading.date);
-                var chartDate = new Date(readingDate.getFullYear(), readingDate.getMonth(), _date.getDate(), _date.getHours(), _date.getMinutes());
+                var chartDate = new Date(readingDate.getFullYear(), readingDate.getMonth(), readingDate.getDate(), readingDate.getHours(), readingDate.getMinutes());
 
                 countersChart.setCell(i, 0, chartDate);
                 countersChart.setCell(i, 1, reading.temp);
