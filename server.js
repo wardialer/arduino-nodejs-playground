@@ -26,7 +26,7 @@ app.get('*', function(req, res) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
+/*
 var board = new five.Board();
 var temp, light, humidity;
 board.on("ready", function() {
@@ -66,4 +66,40 @@ var readSensors = function(){
 }
 
 repeat(readSensors).every(1,'h').start.in(30, 's');
+*/
+var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+
+var pin = new five.Pin(8);
+pin.low();
+
+var saveSensorData = function(humidity){
+    var reading = new Reading({
+        humidity: {
+            raw: humidity.raw,
+            scaled: humidity.scaled
+        }
+    });
+
+    reading.save(function(err, reading){
+        console.log('saved '+JSON.stringify(reading));
+    })
+}
+
+var humidity = new five.Sensor({
+            pin: "A0",
+            freq: 250
+        })
+        .scale(0, 100)
+        .on('change', function() {
+            var status = this.value;
+            console.log(status);
+            saveSensorData(this);
+
+            if (status > 30) pin.high();
+            else pin.low();
+        });    
+});
 
