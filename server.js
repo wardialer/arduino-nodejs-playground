@@ -97,7 +97,7 @@ var humidity = new five.Sensor({
         .on('change', function() {
             var value = this.value;
 
-            if ((value-prev <= 5 || prev-value <= 5) && prev!=0) return;
+            if (Math.abs(value-prev) <= 5) return;
 
             prev = value;
             saveSensorData(this);
