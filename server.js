@@ -72,8 +72,8 @@ var board = new five.Board();
 
 board.on("ready", function() {
 
-var pin = new five.Pin(8);
-pin.low();
+var relay = new five.Pin(8);
+relay.low();
 
 var saveSensorData = function(humidity){
     var reading = new Reading({
@@ -94,12 +94,10 @@ var humidity = new five.Sensor({
         })
         .scale(0, 100)
         .on('change', function() {
-            var status = this.value;
-            console.log(status);
             saveSensorData(this);
 
-            if (status > 30) pin.high();
-            else pin.low();
+            if ( (35-this.value) > 5 ) relay.low();
+            else relay.high();
         });    
 });
 
