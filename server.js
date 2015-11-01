@@ -69,6 +69,7 @@ repeat(readSensors).every(1,'h').start.in(30, 's');
 */
 var five = require("johnny-five");
 var board = new five.Board();
+var prev = 0;
 
 board.on("ready", function() {
 
@@ -94,10 +95,15 @@ var humidity = new five.Sensor({
         })
         .scale(0, 100)
         .on('change', function() {
+            var value = this.value;
+
+            if (value-prev <= 5 || prev-value <= 5) return;
+
+            prev = value;
             saveSensorData(this);
 
-            if ( (35-this.value) > 5 ) relay.low();
-            else relay.high();
+            if ( value > 30 ) relay.high();
+            else relay.low();
         });    
 });
 
