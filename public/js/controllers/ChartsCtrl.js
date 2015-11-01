@@ -17,9 +17,9 @@ angular.module('ChartsCtrl', [])
                 var dateString = date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes();
 
                 countersChart.setCell(i, 0, dateString);
-                countersChart.setCell(i, 1, reading.temp);
-                countersChart.setCell(i, 2, reading.humidity.scaled);
-                countersChart.setCell(i, 3, reading.light.scaled);
+                countersChart.setCell(i, 1, reading.temp || 0);
+                countersChart.setCell(i, 2, reading.humidity?reading.humidity.scaled:0);
+                countersChart.setCell(i, 3, reading.light?reading.light.scaled:0);
             }
 
             $scope.countersChart = {
