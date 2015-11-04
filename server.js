@@ -6,6 +6,7 @@ var five = require("johnny-five");
 var config = require(__dirname +'/conf/config');
 var routes = require(__dirname +'/routes/routes');
 var Reading = require(__dirname +'/models/reading');
+var unirest = require('unirest');
 
 var app = express();
 
@@ -70,11 +71,17 @@ repeat(readSensors).every(1,'h').start.in(30, 's');
 var five = require("johnny-five");
 var board = new five.Board();
 var prev = 0;
+var BASE_URL = "https://api.telegram.org/"+config.botKey+"/";
+var POLLING_URL = BASE_URL + "getUpdates?offset=:offset:&timeout=60";
+var SEND_MESSAGE_URL = BASE_URL + "sendMessage";
+var relay;
+var messageSent = false;
 
 board.on("ready", function() {
 
-var relay = new five.Pin(8);
-relay.low();
+relay = new five.Pin(8);
+relay.high();
+
 
 var saveSensorData = function(humidity){
     var reading = new Reading({
@@ -95,15 +102,83 @@ var humidity = new five.Sensor({
         })
         .scale(0, 100)
         .on('change', function() {
-            var value = this.value;
+            var value = this.raw;
 
             if (Math.abs(value-prev) <= 5) return;
 
             prev = value;
             saveSensorData(this);
 
-            if ( value > 30 ) relay.high();
-            else relay.low();
+            if ( value > 30 ) {
+                relay.high();
+                messageSent = false;
+            }
+            else if(!messageSent) {
+                messageSent = true;
+                sendMessage("Your plant needs water! Do you want to irrigate it?");
+            }
+            //else relay.low();
         });    
 });
 
+
+function poll(offset) {
+    var url = POLLING_URL.replace(":offset:", offset);
+
+    unirest.get(url)
+        .end(function(response) {
+            var body = response.raw_body;
+            if (response.status == 200) {
+                var jsonData = JSON.parse(body);
+                var result = jsonData.result;
+ 
+                if (result.length > 0) {
+                    for (i in result) {
+                        if (runCommand(result[i].message)) continue;
+                    }
+ 
+                    max_offset = (parseInt(result[result.length - 1].update_id) + 1); // update max offset
+                }
+                poll(max_offset);
+            }
+        });
+};
+
+var irrigate = function(message) {
+    relay.low();    
+    sendMessage("Done");
+}
+
+var sendMessage = function(text) {
+    for (var id in config.ids) {
+        var message = {
+            chat_id: id,
+            text: text
+        }
+
+        unirest.post(SEND_MESSAGE_URL)
+        .send(message)
+        .end(function(res) {
+            if (res.status == 200) console.log("Successfully sent message to "+id);
+        });
+    }
+}
+ 
+var COMMANDS = {
+    "irrigate" : irrigate
+};
+
+function runCommand(message) {
+    var msgtext = message.text;
+    
+    if (!msgtext) return false;
+    if (msgtext.indexOf("/") != 0) return false; // no slash at beginning?
+    var command = msgtext.substring(1);
+    if (COMMANDS[command] == null) return false; // not a valid command?
+
+    COMMANDS[command](message);
+
+    return true;
+}
+
+poll(5);

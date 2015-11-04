@@ -6,6 +6,7 @@
         "express" : "3.4.0",
         "mongoose" : "4.1.0",
         "johnny-five" : "0.8.85",
-        "repeat" : "0.0.6"
+        "repeat" : "0.0.6",
+        "unirest" : "latest"
     }
 }
