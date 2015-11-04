@@ -159,7 +159,7 @@ var sendMessage = function(text) {
         unirest.post(SEND_MESSAGE_URL)
         .send(message)
         .end(function(res) {
-            if (res.status == 200) console.log("Successfully sent message to "+id);
+            if (res.status == 200) console.log("Successfully sent message");
         });
     }
 }
