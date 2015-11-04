@@ -70,7 +70,7 @@ repeat(readSensors).every(1,'h').start.in(30, 's');
 */
 var five = require("johnny-five");
 var board = new five.Board();
-var prev = 0;
+var prev = -100;
 var BASE_URL = "https://api.telegram.org/"+config.botKey+"/";
 var POLLING_URL = BASE_URL + "getUpdates?offset=:offset:&timeout=60";
 var SEND_MESSAGE_URL = BASE_URL + "sendMessage";
@@ -150,9 +150,9 @@ var irrigate = function(message) {
 }
 
 var sendMessage = function(text) {
-    for (var id in config.ids) {
+    for (var i in config.ids) {
         var message = {
-            chat_id: id,
+            chat_id: config.ids[i],
             text: text
         }
 
