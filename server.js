@@ -96,6 +96,21 @@ var saveSensorData = function(humidity){
     })
 }
 
+var saveTemperature = function(temperature){
+    var reading = new Reading({
+        temp: temperature.celsius
+    });
+
+    reading.save(function(err, reading){
+        console.log('saved '+JSON.stringify(reading));
+    })
+}
+
+var temp = new five.Temperature({
+    pin: "A1",
+    controller: "LM35"
+});
+
 var humidity = new five.Sensor({
             pin: "A0",
             freq: 250
