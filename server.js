@@ -109,6 +109,8 @@ var saveTemperature = function(temperature){
 var temp = new five.Temperature({
     pin: "A1",
     controller: "LM35"
+}).on('change', function() {
+    saveTemperature(this);
 });
 
 var humidity = new five.Sensor({
