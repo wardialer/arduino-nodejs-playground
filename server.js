@@ -124,6 +124,7 @@ var humidity = new five.Sensor({
 
 function poll(offset) {
     var url = POLLING_URL.replace(":offset:", offset);
+    var max_offset = 0;
 
     unirest.get(url)
         .end(function(response) {
@@ -139,8 +140,6 @@ function poll(offset) {
                     
                     if (result && result[result.length-1]) 
                         max_offset = (parseInt(result[result.length - 1].update_id) + 1); // update max offset
-                    else 
-                        max_offset = 0;
                 }
                 poll(max_offset);
             }
