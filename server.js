@@ -136,8 +136,11 @@ function poll(offset) {
                     for (i in result) {
                         if (runCommand(result[i].message)) continue;
                     }
- 
-                    max_offset = (parseInt(result[result.length - 1].update_id) + 1); // update max offset
+                    
+                    if (result && result[result.length-1]) 
+                        max_offset = (parseInt(result[result.length - 1].update_id) + 1); // update max offset
+                    else 
+                        max_offset = 0;
                 }
                 poll(max_offset);
             }
@@ -181,4 +184,4 @@ function runCommand(message) {
     return true;
 }
 
-poll(5);
+poll(0);
