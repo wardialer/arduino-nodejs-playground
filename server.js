@@ -113,7 +113,7 @@ var temp = new five.Temperature({
     saveTemperature(this);
 });
 
-var humidity = new five.Sensor({
+/*var humidity = new five.Sensor({
             pin: "A0",
             freq: 250
         })
@@ -136,7 +136,7 @@ var humidity = new five.Sensor({
             }
             //else relay.low();
         });    
-});
+});*/
 
 
 function poll(offset) {
