@@ -95,7 +95,7 @@ var saveSensorData = function(humidity){
         console.log('saved '+JSON.stringify(reading));
     })
 }
-/*
+
 var saveTemperature = function(temperature){
     var reading = new Reading({
         temp: temperature.celsius
@@ -111,7 +111,7 @@ var temp = new five.Temperature({
     controller: "LM35"
 }).on('change', function() {
     saveTemperature(this);
-});*/
+});
 
 var humidity = new five.Sensor({
             pin: "A0",
