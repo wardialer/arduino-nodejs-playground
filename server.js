@@ -82,7 +82,7 @@ board.on("ready", function() {
 relay = new five.Pin(8);
 relay.high();
 
-
+/*
 var saveSensorData = function(humidity){
     var reading = new Reading({
         humidity: {
@@ -95,7 +95,7 @@ var saveSensorData = function(humidity){
         console.log('saved '+JSON.stringify(reading));
     })
 }
-
+*/
 var saveTemperature = function(temperature){
     var reading = new Reading({
         temp: temperature.celsius
