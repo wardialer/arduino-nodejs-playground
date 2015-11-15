@@ -135,8 +135,9 @@ var temp = new five.Temperature({
                 sendMessage("Your plant needs water! Do you want to irrigate it?");
             }
             //else relay.low();
-        });    
-});*/
+        });
+*/    
+});
 
 
 function poll(offset) {
