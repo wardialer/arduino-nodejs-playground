@@ -68,7 +68,7 @@ exports.init = function(){
         .scale(0, 100)
         .on('change', function(){
             if (isChanged(prevH, this.raw, 5)) {
-                prevH = value;
+                prevH = this.raw;
                 saveSensorData(this, constants.sensorsNames.humidity);
 
                 if ( value > 30 ) {
