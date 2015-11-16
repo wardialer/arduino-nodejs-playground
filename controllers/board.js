@@ -48,7 +48,7 @@ var tempOnChangeHandler = function(tempSensor){
 }
 
 var humidityOnChangeHandler = function(humiditySensor){
-    if isChanged(prevH, humiditySensor.raw, 5) {
+    if (isChanged(prevH, humiditySensor.raw, 5)) {
         prevH = value;
         saveSensorData(humiditySensor, constants.sensorsNames.humidity);
 
