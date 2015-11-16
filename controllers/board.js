@@ -74,7 +74,7 @@ exports.init = function(){
         relay.high();
 
         var temp = new five.Temperature({
-            pin: constants.temperaturePin
+            pin: constants.temperaturePin,
             controller: constants.temperatureController
         }).on('change', tempOnChangeHandler(this));
 
