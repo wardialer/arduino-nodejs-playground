@@ -69,7 +69,7 @@ exports.setRelayToLow = function() {
 
 exports.init = function(){
     var board = new five.Board();
-    board.on("ready", function) {
+    board.on("ready", function() {
         relay = new five.Pin(constants.relayPin);
         relay.high();
 
@@ -84,5 +84,5 @@ exports.init = function(){
         })
         .scale(0, 100)
         .on('change', humidityOnChangeHandler(this));
-    }
+    })
 }
