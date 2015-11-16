@@ -25,9 +25,7 @@ var saveSensorData = function(sensor, type){
             }
             break;
         case constants.sensorNames.temperature:
-            reading.temp = {
-                temp: sensor.celsius
-            }
+            reading.temp = sensor.celsius;
             break;
         default:
             break;
