@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var config = require(__dirname +'/conf/config');
 var readings = require(__dirname +'/routes/readings');
 
-var botTelegram = require('controllers/telegram_bot');
-var board = require('controllers/board');
+var botTelegram = require(__dirname + 'controllers/telegram_bot');
+var board = require(__dirname + 'controllers/board');
 
 var app = express();
 
