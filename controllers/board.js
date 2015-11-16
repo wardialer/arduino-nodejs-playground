@@ -41,29 +41,6 @@ exports.getBoard = function() {
     return board;
 }
 
-var tempOnChangeHandler = function(tempSensor){
-    if (isChanged(prevT, tempSensor.celsius, 1)) {
-        prevT = tempSensor.celsius;
-        saveSensorData(tempSensor, constants.sensorNames.temperature);
-    }
-}
-
-var humidityOnChangeHandler = function(humiditySensor){
-    if (isChanged(prevH, humiditySensor.raw, 5)) {
-        prevH = value;
-        saveSensorData(humiditySensor, constants.sensorsNames.humidity);
-
-        if ( value > 30 ) {
-            relay.high();
-            messageSent = false;
-        }
-        else if(!messageSent) {
-            messageSent = true;
-            botTelegram.sendMessage("Your plant needs water! Do you want to irrigate it?");
-        }
-    }
-}
-
 exports.setRelayToLow = function() {
     relay.low();
 }
@@ -77,13 +54,32 @@ exports.init = function(){
         var temp = new five.Temperature({
             pin: constants.temperaturePin,
             controller: constants.temperatureController
-        }).on('change', tempOnChangeHandler(this));
+        }).on('change', function() {
+            if (isChanged(prevT, this.celsius, 1)) {
+                prevT = this.celsius;
+                saveSensorData(this, constants.sensorNames.temperature);
+            }
+        });
 
         var humidity = new five.Sensor({
             pin: constants.humidityPin,
             freq: constants.humidityFrequency
         })
         .scale(0, 100)
-        .on('change', humidityOnChangeHandler(this));
+        .on('change', function(){
+            if (isChanged(prevH, this.raw, 5)) {
+                prevH = value;
+                saveSensorData(this, constants.sensorsNames.humidity);
+
+                if ( value > 30 ) {
+                    relay.high();
+                    messageSent = false;
+                }
+                else if(!messageSent) {
+                    messageSent = true;
+                    botTelegram.sendMessage("Your plant needs water! Do you want to irrigate it?");
+                }
+            }
+        });
     })
 }
