@@ -67,11 +67,12 @@ exports.init = function(){
         })
         .scale(0, 100)
         .on('change', function(){
-            if (isChanged(prevH, this.raw, 5)) {
-                prevH = this.raw;
+            var value = this.raw;
+            if (isChanged(prevH, value, 5)) {
+                prevH = value;
                 saveSensorData(this, constants.sensorNames.humidity);
 
-                if ( value > 30 ) {
+                if ( value > constants.humidityTrigger ) {
                     relay.high();
                     messageSent = false;
                 }

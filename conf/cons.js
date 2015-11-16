@@ -8,3 +8,4 @@ exports.sensorNames = {
     temperature: "temperature",
     light: "light"
 }
+exports.humidityTrigger = 30;
