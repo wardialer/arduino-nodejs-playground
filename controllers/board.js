@@ -1,6 +1,7 @@
 var constants = require("./../conf/cons");
 var five = require("johnny-five");
-var botTelegram = require("./telegramBot")
+var botTelegram = require("./telegramBot");
+var Reading = require("./../models/reading");
 var board;
 var prevT = -100;
 var prevH = -100;
