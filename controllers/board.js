@@ -1,3 +1,4 @@
+var config = require('./../conf/config');
 var constants = require("./../conf/constants");
 var five = require("johnny-five");
 var botTelegram = require("./telegramBot")
