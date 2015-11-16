@@ -1,5 +1,4 @@
-var config = require('./../conf/config');
-var constants = require("./../conf/constants");
+var constants = require("./../conf/cons");
 var five = require("johnny-five");
 var botTelegram = require("./telegramBot")
 var board;
