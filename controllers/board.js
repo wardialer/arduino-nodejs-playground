@@ -69,7 +69,7 @@ exports.init = function(){
         .on('change', function(){
             if (isChanged(prevH, this.raw, 5)) {
                 prevH = this.raw;
-                saveSensorData(this, constants.sensorsNames.humidity);
+                saveSensorData(this, constants.sensorNames.humidity);
 
                 if ( value > 30 ) {
                     relay.high();
