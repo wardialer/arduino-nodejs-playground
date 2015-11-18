@@ -31,17 +31,18 @@ var poll = exports.poll = function(offset) {
 };
 
 var water = function(message) {
-    var index = config.ids.indexOf(message.from.id);
+    var sender = message.from.id;
+    var index = config.ids.indexOf(sender);
     if (index >= 0) {
         board.setRelayToLow();
-        sendMessage("Done");
+        sendMessage([sender], "Done");
     } else {
-        sendMessage("You can't do that")
+        sendMessage([sender], "You can't do that")
     }
 }
 
-var sendMessage = exports.sendMessage = function(text, keyboard) {
-    for (var i in config.ids) {
+var sendMessage = exports.sendMessage = function(users, text, keyboard) {
+    for (var i in users) {
         var message = {
             chat_id: config.ids[i],
             text: text

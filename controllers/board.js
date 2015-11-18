@@ -1,4 +1,5 @@
 var constants = require("./../conf/cons");
+var config = require('../conf/config');
 var five = require("johnny-five");
 var botTelegram = require("./telegramBot");
 var Reading = require("./../models/reading");
@@ -81,7 +82,7 @@ exports.init = function(){
                 }
                 else if(!messageSent) {
                     messageSent = true;
-                    botTelegram.sendMessage("Your plant needs water! Do you want to irrigate it?", [["/water"], ["/no"]]);
+                    botTelegram.sendMessage(config.ids, "Your plant needs water! Do you want to irrigate it?", [["/water"], ["/no"]]);
                 }
             }
         });
