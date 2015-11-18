@@ -23,9 +23,13 @@ var saveSensorData = function(sensor, type){
                 raw: sensor.raw,
                 scaled: sensor.scaled
             }
+            if (prevT != -100)
+                reading.temp = prevT;
             break;
         case constants.sensorNames.temperature:
             reading.temp = sensor.celsius;
+            if (prevH != -100)
+                reading.humidity = {scaled: prevH};
             break;
         default:
             break;
@@ -65,7 +69,7 @@ exports.init = function(){
         })
         .scale(0, 100)
         .on('change', function(){
-            var value = this.raw;
+            var value = this.scaled;
             if (isChanged(prevH, value, 5)) {
                 prevH = value;
                 saveSensorData(this, constants.sensorNames.humidity);
