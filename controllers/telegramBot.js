@@ -35,12 +35,15 @@ var water = function() {
     sendMessage("Done");
 }
 
-var sendMessage = exports.sendMessage = function(text) {
+var sendMessage = exports.sendMessage = function(text, keyboard) {
     for (var i in config.ids) {
         var message = {
             chat_id: config.ids[i],
             text: text
         }
+
+        if (keyboard)
+            message.reply_markup = {'keyboard': keyboard, 'resize_keyboard': False, 'one_time_keyboard': true};
 
         unirest.post(SEND_MESSAGE_URL)
         .send(message)
