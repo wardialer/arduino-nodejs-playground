@@ -43,7 +43,7 @@ var sendMessage = exports.sendMessage = function(text, keyboard) {
         }
 
         if (keyboard)
-            message.reply_markup = {'keyboard': keyboard, 'resize_keyboard': false, 'one_time_keyboard': true};
+            message.reply_markup = {keyboard: keyboard};
 
         unirest.post(SEND_MESSAGE_URL)
         .send(message)
