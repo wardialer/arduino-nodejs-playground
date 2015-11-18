@@ -80,7 +80,7 @@ exports.init = function(){
                 }
                 else if(!messageSent) {
                     messageSent = true;
-                    botTelegram.sendMessage("Your plant needs water! Do you want to irrigate it?", [["/water"]]);
+                    botTelegram.sendMessage("Your plant needs water! Do you want to irrigate it?", [["/water"], ["/no"]]);
                 }
             }
         });
