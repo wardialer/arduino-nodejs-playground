@@ -30,9 +30,14 @@ var poll = exports.poll = function(offset) {
         });
 };
 
-var water = function() {
-    board.setRelayToLow();
-    sendMessage("Done");
+var water = function(message) {
+    var index = config.ids.indexOf(message.from.id);
+    if (index >= 0) {
+        board.setRelayToLow();
+        sendMessage("Done");
+    } else {
+        sendMessage("You can't do that")
+    }
 }
 
 var sendMessage = exports.sendMessage = function(text, keyboard) {
