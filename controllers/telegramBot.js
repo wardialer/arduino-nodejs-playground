@@ -31,7 +31,7 @@ var poll = exports.poll = function(offset) {
 };
 
 var water = function(message) {
-    var sender = message.from.id;
+    var sender = message.from.id.toString();
     var index = config.ids.indexOf(sender);
     if (index >= 0) {
         board.setRelayToLow();
