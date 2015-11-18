@@ -31,7 +31,7 @@ var poll = exports.poll = function(offset) {
 };
 
 var water = function(message) {
-    var sender = message.from.id.toString();
+    var sender = message.from.id;
     var index = config.ids.indexOf(sender);
     if (index >= 0) {
         board.setRelayToLow();
@@ -44,7 +44,7 @@ var water = function(message) {
 var sendMessage = exports.sendMessage = function(users, text, keyboard) {
     for (var i in users) {
         var message = {
-            chat_id: config.ids[i],
+            chat_id: users[i],
             text: text
         }
 
