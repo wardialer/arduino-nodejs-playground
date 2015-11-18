@@ -44,7 +44,8 @@ exports.getBoard = function() {
 }
 
 exports.setRelayToLow = function() {
-    relay.low();
+    if (relay)
+        relay.low();
 }
 
 exports.init = function(){
